@@ -1,3 +1,5 @@
+pub mod repeated_string;
+
 #[cfg(test)]
 mod tests {
     #[test]
