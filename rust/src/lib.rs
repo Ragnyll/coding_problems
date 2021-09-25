@@ -6,3 +6,4 @@ pub mod grid_traveller;
 pub mod can_sum;
 pub mod how_sum;
 pub mod container_with_most_water;
+pub mod climbing_stairs;
