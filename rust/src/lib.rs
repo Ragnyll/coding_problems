@@ -8,3 +8,4 @@ pub mod how_sum;
 pub mod container_with_most_water;
 pub mod climbing_stairs;
 pub mod coin_change;
+pub mod decode_ways;
