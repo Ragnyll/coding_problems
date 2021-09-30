@@ -18,5 +18,8 @@ fn main() {
         .ok()
         .expect("Failed to read line");
 
-    repeated_string(&string_to_repeat.trim(), chars_to_consider.trim().parse::<i32>().unwrap() as usize);
+    repeated_string(
+        &string_to_repeat.trim(),
+        chars_to_consider.trim().parse::<i32>().unwrap() as usize,
+    );
 }

@@ -33,7 +33,6 @@ fn coin_change<T: PrimInt + Debug>(target: T, coins: &[T]) -> usize {
 
                         &coin_combos[i + coin_val].push(append_me);
                     }
-
                 }
             }
         }

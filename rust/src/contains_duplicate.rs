@@ -5,7 +5,7 @@ fn contains_duplicate(list: &[usize]) -> bool {
     let mut scanned_numbers = HashSet::new();
     for num in list.into_iter() {
         if scanned_numbers.contains(num) {
-            return true
+            return true;
         }
         scanned_numbers.insert(num);
     }

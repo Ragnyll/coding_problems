@@ -30,13 +30,11 @@ fn repeated_string_partial_fit() {
     assert_eq!(repeated_string("aba", 2), 1)
 }
 
-
 #[test]
 #[should_panic]
 fn repeated_string_empty_string_to_repeat_should_panic() {
     repeated_string("", 6);
 }
-
 
 #[test]
 fn repeated_string_no_chars_to_consider() {

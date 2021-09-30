@@ -25,7 +25,7 @@ fn decode_ways(str_to_decode: &str) -> i32 {
         let mut valid = true;
         let mut lookahead = 1;
         while valid {
-            if start_char + lookahead > str_to_decode.len(){
+            if start_char + lookahead > str_to_decode.len() {
                 break;
             }
 

@@ -12,7 +12,7 @@ fn climbing_stairs(n: usize) -> usize {
 
         while current_step < stairs.len() {
             stairs[current_step] = stairs[current_step - 1] + stairs[current_step - 2];
-            current_step +=1;
+            current_step += 1;
         }
     }
 

@@ -26,7 +26,6 @@ fn most_water(bars: &[usize]) -> usize {
         if area > max_area {
             max_area = area;
         }
-
     }
     max_area
 }
@@ -37,7 +36,7 @@ pub mod test {
 
     #[test]
     fn ex_1() {
-        assert_eq!(1, most_water(&[1,1]));
+        assert_eq!(1, most_water(&[1, 1]));
     }
 
     #[test]
@@ -52,11 +51,11 @@ pub mod test {
 
     #[test]
     fn ex_4() {
-        assert_eq!(6, most_water(&[ 1, 5, 4, 3 ]));
+        assert_eq!(6, most_water(&[1, 5, 4, 3]));
     }
 
     #[test]
     fn ex_5() {
-        assert_eq!(12, most_water(&[ 3, 1, 2, 4, 5 ]));
+        assert_eq!(12, most_water(&[3, 1, 2, 4, 5]));
     }
 }

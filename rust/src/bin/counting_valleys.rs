@@ -19,7 +19,7 @@ fn main() {
                     num_valleys += 1;
                     in_valley = false;
                 }
-            },
+            }
             'D' => {
                 current_level -= 1;
                 if current_level >= 0 {
@@ -27,7 +27,7 @@ fn main() {
                 } else {
                     in_valley = true;
                 }
-            },
+            }
             _ => (),
         }
     }
