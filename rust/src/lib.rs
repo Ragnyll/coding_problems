@@ -9,3 +9,4 @@ pub mod fib;
 pub mod grid_traveller;
 pub mod how_sum;
 pub mod repeated_string;
+pub mod find_all_duplicates_in_array;
