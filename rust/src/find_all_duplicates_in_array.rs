@@ -12,7 +12,7 @@ fn find_all_duplicates(arr: &[u16]) -> Vec<u16> {
         register[(*num as usize) - 1] += 1;
     }
 
-    let mut duplicates = vec![];
+    let mut duplicates = Vec::with_capacity(arr.len());
 
     for i in 0..register.len() {
         if register[i] > 1 {
