@@ -3,7 +3,7 @@
 // You must write an algorithm that runs in O(n) time and uses only constant extra space.
 
 #[allow(dead_code)]
-fn find_all_duplicates(arr: &[u16]) -> Vec<u16>{
+fn find_all_duplicates(arr: &[u16]) -> Vec<u16> {
     // reserve a vector with max size of the input value (the len of arr) to fit the constant space
     // requiment
     let mut register = vec![0; arr.len()];
@@ -31,7 +31,7 @@ pub mod test {
     fn ex_1() {
         // Input: nums = [4,3,2,7,8,2,3,1]
         // Output: [2,3]
-        assert_eq!(vec![2, 3], find_all_duplicates(&[4,3,2,7,8,2,3,1]));
+        assert_eq!(vec![2, 3], find_all_duplicates(&[4, 3, 2, 7, 8, 2, 3, 1]));
     }
 
     #[test]

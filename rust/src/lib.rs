@@ -6,7 +6,7 @@ pub mod container_with_most_water;
 pub mod contains_duplicate;
 pub mod decode_ways;
 pub mod fib;
+pub mod find_all_duplicates_in_array;
 pub mod grid_traveller;
 pub mod how_sum;
 pub mod repeated_string;
-pub mod find_all_duplicates_in_array;
