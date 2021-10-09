@@ -10,3 +10,4 @@ pub mod find_all_duplicates_in_array;
 pub mod grid_traveller;
 pub mod how_sum;
 pub mod repeated_string;
+pub mod reverse_linked_list;

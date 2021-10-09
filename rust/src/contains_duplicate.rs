@@ -3,7 +3,7 @@ use std::collections::HashSet;
 #[allow(dead_code)]
 fn contains_duplicate(list: &[usize]) -> bool {
     let mut scanned_numbers = HashSet::new();
-    for num in list.into_iter() {
+    for num in list {
         if scanned_numbers.contains(num) {
             return true;
         }
