@@ -11,3 +11,4 @@ pub mod grid_traveller;
 pub mod how_sum;
 pub mod repeated_string;
 pub mod reverse_linked_list;
+pub mod merge_sorted_list;
