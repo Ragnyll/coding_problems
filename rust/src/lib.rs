@@ -13,3 +13,6 @@ pub mod repeated_string;
 pub mod reverse_linked_list;
 pub mod merge_sorted_list;
 pub mod maximum_subarray;
+pub mod maximum_binary_tree_depth;
+// pub mod longest_palindromic_substring;
+pub mod poisonous_plants;
