@@ -20,20 +20,19 @@ fn is_same(a: &[i32], b: &[i32]) -> bool {
 /// Given an array of pesticide_lvls determines the number of days after which no plant dies
 #[allow(dead_code)]
 fn poisonous_plants(pesticide_lvls: &[i32]) -> i32 {
+    // base case
     if pesticide_lvls.len() == 0 || pesticide_lvls.len() == 1 {
         return 1;
     }
-    let mut days_survived = -1;
 
+    let mut days_survived = -1;
     let mut surviving_plants_current: Vec<i32> = Vec::with_capacity(pesticide_lvls.len());
     let mut surviving_plants_previous = pesticide_lvls.to_vec();
-
 
     while !is_same(&surviving_plants_current, &surviving_plants_previous) {
         surviving_plants_current = surviving_plants_previous.clone();
         surviving_plants_previous = Vec::with_capacity(surviving_plants_current.len());
 
-        println!("surviving_plants current before loop: {:?}", surviving_plants_current);
         for i in 0..surviving_plants_current.len() {
             // cant look left. leftmost never dies based on description
             if i == 0 {
@@ -46,9 +45,6 @@ fn poisonous_plants(pesticide_lvls: &[i32]) -> i32 {
                 surviving_plants_previous.push(surviving_plants_current[i]);
             }
         }
-
-        println!("surviving_plants current: {:?}", surviving_plants_current);
-        println!("surviving_plants previous: {:?}", surviving_plants_previous);
 
         days_survived += 1;
     }

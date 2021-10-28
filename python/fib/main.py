@@ -18,7 +18,6 @@ def fib_memoized(n: int, memo: dict) -> int:
             memo[n] = fib_memoized(n - 1, memo) + fib_memoized(n - 2, memo)
             return memo[n]
 
-    pass
 
 
 class TestFib(unittest.TestCase):
