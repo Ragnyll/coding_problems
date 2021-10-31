@@ -18,5 +18,5 @@ class TestDiagonalDifference(unittest.TestCase):
         self.assertEqual(0, diagonal_difference([]))
 
     def test_sample(self):
-        self.assertEqual(15, diagonal_difference([[11, 12, 4], [4, 5, 6], [10, 8, -12]]))
-
+        self.assertEqual(15, diagonal_difference(
+            [[11, 12, 4], [4, 5, 6], [10, 8, -12]]))
