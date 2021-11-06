@@ -41,6 +41,38 @@ fn bf_has_path(adjacency_list: &HashMap<String, Vec<String>>, src: &str, dest: &
     false
 }
 
+// TODO: see if i can do this with a stack allocated array type
+/// give a list of edge connections finds if there is a path from src to dest
+#[allow(dead_code)]
+fn bf_has_path_from_edges(edges: Vec<Vec<String>>, src: String, dest: String) -> bool {
+    fn build_adjacency_list_from_edges(edges: Vec<Vec<String>>) -> HashMap<String, Vec<String>> {
+        let mut adjacency_list: HashMap::<String, Vec::<String>> = HashMap::new();
+        for edge in edges {
+            // There will only ever be two nodes in an edge
+            for node in edge {
+                if !adjacency_list.contains_key(&node) {
+                    adjacency_list.insert(node.clone(), vec![]);
+                }
+            }
+            // put the neighbor in the list of adjacent nodes
+            adjacency_list[&edge[0]].push(edge[1].clone());
+            adjacency_list[&edge[1]].push(edge[0].clone());
+        }
+        adjacency_list
+    }
+
+    fn bf_has_path_undirected(
+        adjacency_list: &HashMap<String, Vec<String>>,
+        src: String,
+        dest: String,
+    ) -> bool {
+        false
+    }
+
+    let adjacency_list = build_adjacency_list_from_edges(edges);
+    bf_has_path_undirected(&adjacency_list, src, dest)
+}
+
 #[cfg(test)]
 mod test {
     use super::{bf_print, bf_has_path};
