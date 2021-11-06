@@ -10,14 +10,14 @@ const SAFE_CLOUD: u8 = 0;
 #[allow(dead_code)]
 fn jump(clouds: &[u16]) -> u16 {
     if clouds.len() <= 1 {
-        return 0
+        return 0;
     }
 
     let mut current_cloud = 0;
     let mut num_jumps = 0;
 
     while current_cloud != clouds.len() - 1 {
-        if clouds[current_cloud + 2] == SAFE_CLOUD as u16 {
+        if current_cloud + 2 <= clouds.len() - 1 && clouds[current_cloud + 2] == SAFE_CLOUD as u16 {
             current_cloud += 2;
         } else {
             current_cloud += 1;
@@ -37,5 +37,6 @@ mod test {
     fn test_jump() {
         assert_eq!(jump(&[0, 0, 0, 0, 1, 0]), 3);
         assert_eq!(jump(&[0, 0, 1, 0, 0, 1, 0]), 4);
+        assert_eq!(jump(&[0, 0, 0, 1, 0, 0]), 3)
     }
 }

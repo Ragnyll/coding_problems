@@ -9,6 +9,7 @@ import unittest
 
 SAFE_CLOUD = 0
 
+
 def jumping_on_the_clouds(clouds: list[int]) -> int:
     """jumping_on_the_clouds: determines the minimum number it takes to jump from the starting position to the last cloud.
 
@@ -24,8 +25,10 @@ def jumping_on_the_clouds(clouds: list[int]) -> int:
     num_jumps = 0
 
     while current_cloud != len(clouds) - 1:
+        print(current_cloud)
         # always try two jumps first
-        if clouds[current_cloud + 2] == SAFE_CLOUD:
+        # not the most efficient comparison, but prbly the most idiomatic
+        if current_cloud + 2 <= len(clouds) - 1 and clouds[current_cloud + 2] == SAFE_CLOUD:
             current_cloud += 2
         else:
             current_cloud += 1
@@ -39,4 +42,4 @@ class TestJumpingOnTheClouds(unittest.TestCase):
     def test_jump(self):
         self.assertEqual(jumping_on_the_clouds([0, 0, 0, 0, 1, 0]), 3)
         self.assertEqual(jumping_on_the_clouds([0, 0, 1, 0, 0, 1, 0]), 4)
-
+        self.assertEqual(jumping_on_the_clouds([0, 0, 0, 1, 0, 0]), 3)
