@@ -27,6 +27,10 @@ fn df_print_recursive(adjacency_list: HashMap<String, Vec<String>>, start: &str)
 /// Returns if a path exists from src to destination given an adjacency_list
 #[allow(dead_code)]
 fn df_has_path(adjacency_list: &HashMap<String, Vec<String>>, src: &str, dest: &str) -> bool {
+    if src == dest {
+        return true;
+    }
+
     for neighbor in &adjacency_list[src] {
         if df_has_path(&adjacency_list, neighbor, dest) {
             return true;
@@ -84,7 +88,10 @@ mod test {
         adjacency_list.insert(String::from("d"), vec![String::from("f")]);
         adjacency_list.insert(String::from("e"), vec![]);
         adjacency_list.insert(String::from("f"), vec![]);
+        adjacency_list.insert(String::from("g"), vec![]);
 
-        df_has_path(&adjacency_list, &"a", &"d");
+        assert_eq!(df_has_path(&adjacency_list, &"a", &"b"), true);
+        assert_eq!(df_has_path(&adjacency_list, &"a", &"d"), true);
+        assert_eq!(df_has_path(&adjacency_list, &"a", &"g"), false);
     }
 }
