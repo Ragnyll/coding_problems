@@ -31,7 +31,7 @@ fn coin_change<T: PrimInt + Debug>(target: T, coins: &[T]) -> usize {
                         let mut append_me = possible_coin_set.clone();
                         append_me.push(*coin);
 
-                        &coin_combos[i + coin_val].push(append_me);
+                        let _ = &coin_combos[i + coin_val].push(append_me);
                     }
                 }
             }
