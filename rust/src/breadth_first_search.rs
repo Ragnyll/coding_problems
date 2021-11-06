@@ -55,6 +55,7 @@ fn bf_has_path_from_edges(edges: Vec<Vec<String>>, src: String, dest: String) ->
                 }
             }
             // put the neighbor in the list of adjacent nodes
+            // adjacency_list.entry(edge[0]).and_modify(|n: Vec<String>| -> _ { n.push(edge[1].clone()) });
             adjacency_list[&edge[0]].push(edge[1].clone());
             adjacency_list[&edge[1]].push(edge[0].clone());
         }
