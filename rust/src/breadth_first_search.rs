@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use std::collections::VecDeque;
+use std::collections::HashSet;
 
 #[allow(dead_code)]
 fn bf_print(adjacency_list: HashMap<String, Vec<String>>, start: &str) {
@@ -46,18 +47,24 @@ fn bf_has_path(adjacency_list: &HashMap<String, Vec<String>>, src: &str, dest: &
 #[allow(dead_code)]
 fn bf_has_path_from_edges(edges: Vec<Vec<String>>, src: String, dest: String) -> bool {
     fn build_adjacency_list_from_edges(edges: Vec<Vec<String>>) -> HashMap<String, Vec<String>> {
-        let mut adjacency_list: HashMap::<String, Vec::<String>> = HashMap::new();
+        let mut adjacency_list: HashMap<String, Vec<String>> = HashMap::new();
         for edge in edges {
             // There will only ever be two nodes in an edge
-            for node in edge {
-                if !adjacency_list.contains_key(&node) {
+            for node in &edge {
+                if !adjacency_list.contains_key(node) {
                     adjacency_list.insert(node.clone(), vec![]);
                 }
             }
             // put the neighbor in the list of adjacent nodes
             // adjacency_list.entry(edge[0]).and_modify(|n: Vec<String>| -> _ { n.push(edge[1].clone()) });
-            adjacency_list[&edge[0]].push(edge[1].clone());
-            adjacency_list[&edge[1]].push(edge[0].clone());
+            adjacency_list
+                .get_mut(&edge[0])
+                .unwrap()
+                .push(edge[1].clone());
+            adjacency_list
+                .get_mut(&edge[1])
+                .unwrap()
+                .push(edge[0].clone());
         }
         adjacency_list
     }
@@ -67,16 +74,41 @@ fn bf_has_path_from_edges(edges: Vec<Vec<String>>, src: String, dest: String) ->
         src: String,
         dest: String,
     ) -> bool {
+        if src == dest {
+            return true;
+        }
+
+        let mut explored = HashSet::new();
+        let mut queue = VecDeque::new();
+        queue.push_back(String::from(src));
+
+        while !queue.is_empty() {
+            let current = queue.pop_front().unwrap();
+            explored.insert(current.clone());
+            if current == dest {
+                return true;
+            }
+
+            // get the current's neighbors
+            for neighbor in &adjacency_list[&current] {
+                // do not explore nodes that have already been expored.
+                if !explored.contains(neighbor) {
+                    queue.push_back(neighbor.clone());
+                }
+            }
+        }
+
         false
     }
 
     let adjacency_list = build_adjacency_list_from_edges(edges);
+    println!("{:?}", adjacency_list);
     bf_has_path_undirected(&adjacency_list, src, dest)
 }
 
 #[cfg(test)]
 mod test {
-    use super::{bf_print, bf_has_path};
+    use super::{bf_print, bf_has_path, bf_has_path_from_edges};
     use std::collections::HashMap;
 
     #[test]
@@ -112,5 +144,34 @@ mod test {
         assert_eq!(bf_has_path(&adjacency_list, &"a", &"b"), true);
         assert_eq!(bf_has_path(&adjacency_list, &"a", &"d"), true);
         assert_eq!(bf_has_path(&adjacency_list, &"a", &"g"), false);
+    }
+
+    #[test]
+    fn test_bf_has_path_from_edges() {
+        let edges = vec![
+            vec![String::from("i"), String::from("j")],
+            vec![String::from("k"), String::from("i")],
+            vec![String::from("m"), String::from("k")],
+            vec![String::from("k"), String::from("l")],
+            vec![String::from("o"), String::from("n")],
+        ];
+
+        // adjacent nodes
+        assert_eq!(
+            bf_has_path_from_edges(edges.clone(), String::from("i"), String::from("j")),
+            true
+        );
+        // indirect connected
+        assert_eq!(
+            bf_has_path_from_edges(edges.clone(), String::from("i"), String::from("m")),
+            true
+        );
+        // passes cycle
+
+        // unreachable nodes
+        assert_eq!(
+            bf_has_path_from_edges(edges.clone(), String::from("i"), String::from("n")),
+            false
+        );
     }
 }
