@@ -102,7 +102,6 @@ fn bf_has_path_from_edges(edges: Vec<Vec<String>>, src: String, dest: String) ->
     }
 
     let adjacency_list = build_adjacency_list_from_edges(edges);
-    println!("{:?}", adjacency_list);
     bf_has_path_undirected(&adjacency_list, src, dest)
 }
 

@@ -34,7 +34,7 @@ impl BinaryTree {
 }
 
 #[allow(dead_code)]
-fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+fn max_depth(_root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     // build the tree
 
     // find len to longest leaf
