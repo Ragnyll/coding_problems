@@ -20,3 +20,4 @@ pub mod depth_first_search;
 pub mod jumping_on_the_clouds;
 pub mod poisonous_plants;
 pub mod binary_search_tree;
+pub mod longest_substring_without_repeating_characters;
