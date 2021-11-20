@@ -17,6 +17,7 @@ pub mod reverse_linked_list;
 // pub mod castles_on_the_grid;
 pub mod binary_search_tree;
 pub mod breadth_first_search;
+pub mod connected_components;
 pub mod datetimes;
 pub mod depth_first_search;
 pub mod jumping_on_the_clouds;
