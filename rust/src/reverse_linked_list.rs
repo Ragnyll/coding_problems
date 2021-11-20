@@ -57,4 +57,3 @@ pub mod test {
         assert_eq!(VecDeque::new(), reverse_list(VecDeque::new()));
     }
 }
-
