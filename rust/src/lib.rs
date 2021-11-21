@@ -25,3 +25,4 @@ pub mod longest_substring_without_repeating_characters;
 pub mod median;
 pub mod poisonous_plants;
 pub mod search_in_rotated_sorted_array;
+pub mod shortest_path;
