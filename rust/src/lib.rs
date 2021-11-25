@@ -29,4 +29,4 @@ pub mod search_in_rotated_sorted_array;
 pub mod shortest_path;
 pub mod jump_game;
 pub mod unique_paths;
-pub mod combination_sum_4;
+pub mod house_robber;
