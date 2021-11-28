@@ -1,6 +1,7 @@
 use std::io::stdin;
 
-fn main() {
+#[allow(dead_code)]
+fn counting_valleys() {
     let mut input = String::new();
     stdin()
         .read_line(&mut input)

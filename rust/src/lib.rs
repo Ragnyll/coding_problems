@@ -30,3 +30,6 @@ pub mod shortest_path;
 pub mod jump_game;
 pub mod unique_paths;
 pub mod house_robber;
+pub mod pascals_triangle;
+pub mod counting_valleys;
+pub mod sock_merchant;
