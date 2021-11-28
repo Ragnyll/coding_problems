@@ -32,3 +32,4 @@ pub mod search_in_rotated_sorted_array;
 pub mod shortest_path;
 pub mod sock_merchant;
 pub mod unique_paths;
+pub mod word_break;
