@@ -13,8 +13,6 @@ pub mod maximum_subarray;
 pub mod merge_sorted_list;
 pub mod repeated_string;
 pub mod reverse_linked_list;
-// pub mod longest_palindromic_substring;
-// pub mod castles_on_the_grid;
 pub mod binary_search_tree;
 pub mod breadth_first_search;
 pub mod connected_components;
