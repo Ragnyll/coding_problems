@@ -45,6 +45,6 @@ mod test {
 
     #[test]
     fn test_pascals_triangle_2() {
-        assert_eq!(generate(2), vec![vec![1],vec![1,1]])
+        assert_eq!(generate(2), vec![vec![1], vec![1, 1]])
     }
 }
