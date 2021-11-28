@@ -20,9 +20,15 @@ pub fn generate(num_rows: i32) -> Vec<Vec<i32>> {
     triangle
 }
 
+/// Given an integer rowIndex, return the rowIndexth (0-indexed) row of the Pascal's triangle.
+#[allow(dead_code)]
+pub fn get_row(row_index: i32) -> Vec<i32> {
+    generate(row_index + 1).last().unwrap().to_vec()
+}
+
 #[cfg(test)]
 mod test {
-    use super::generate;
+    use super::{generate, get_row};
 
     #[test]
     fn test_pascals_triangle() {
@@ -46,5 +52,10 @@ mod test {
     #[test]
     fn test_pascals_triangle_2() {
         assert_eq!(generate(2), vec![vec![1], vec![1, 1]])
+    }
+
+    #[test]
+    fn test_get_row() {
+        assert_eq!(get_row(3), vec![1, 3, 3, 1])
     }
 }
