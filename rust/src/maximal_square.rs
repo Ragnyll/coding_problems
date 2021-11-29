@@ -11,7 +11,7 @@ pub fn maximal_square(matrix: Vec<Vec<char>>) -> i32 {
         for j in 1..dp_w {
             // if the matrix has a 1 check all the neighbors on dp
             if matrix[i - 1][j - 1] == '1' {
-                //               left          left          diagonal
+                //               left          up            diagonal
                 dp[i][j] = *vec![dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]]
                     .iter()
                     .min()
