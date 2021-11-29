@@ -33,3 +33,4 @@ pub mod shortest_path;
 pub mod sock_merchant;
 pub mod unique_paths;
 pub mod word_break;
+pub mod maximal_square;
