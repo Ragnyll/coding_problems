@@ -2,10 +2,8 @@
 
 #[allow(dead_code)]
 pub fn maximal_square(matrix: Vec<Vec<char>>) -> i32 {
-    let m_h = matrix.len();
-    let m_w = matrix[0].len();
-    let dp_h = m_h + 1;
-    let dp_w = m_w + 1;
+    let dp_h = matrix.len() + 1;
+    let dp_w = matrix[0].len() + 1;
     let mut dp: Vec<Vec<i32>> = vec![vec![0; dp_w]; dp_h];
 
     let mut largest = 0;
