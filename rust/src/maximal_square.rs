@@ -2,10 +2,30 @@
 
 #[allow(dead_code)]
 pub fn maximal_square(matrix: Vec<Vec<char>>) -> i32 {
-    let h = matrix.len();
-    let w = matrix[0].len();
-    let mut dp: Vec<Vec<i32>> = vec![vec![0; w]; h];
-    0
+    let m_h = matrix.len();
+    let m_w = matrix[0].len();
+    let dp_h = m_h + 1;
+    let dp_w = m_w + 1;
+    let mut dp: Vec<Vec<i32>> = vec![vec![0; dp_w]; dp_h];
+
+    let mut largest = 0;
+    for i in 1..dp_h {
+        for j in 1..dp_w {
+            // if the matrix has a 1 check all the neighbors on dp
+            if matrix[i - 1][j - 1] == '1' {
+                //               left          left          diagonal
+                dp[i][j] = *vec![dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]]
+                    .iter()
+                    .min()
+                    .unwrap() + 1;
+
+                // save the largest square
+                largest = std::cmp::max(dp[i][j], largest);
+            }
+        }
+    }
+
+    largest * largest
 }
 
 #[cfg(test)]
@@ -47,7 +67,7 @@ mod test {
                 vec!['1', '1', '1'],
                 vec!['0', '1', '1'],
             ]),
-            2
+            4
         );
     }
 
@@ -59,7 +79,7 @@ mod test {
                 vec!['1', '1', '1'],
                 vec!['1', '1', '1'],
             ]),
-            3
+            9
         );
 
         assert_eq!(
@@ -69,7 +89,7 @@ mod test {
                 vec!['1', '1', '1', '0'],
                 vec!['0', '0', '0', '0'],
             ]),
-            3
+            9
         );
     }
 }
