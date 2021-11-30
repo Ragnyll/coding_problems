@@ -34,3 +34,4 @@ pub mod sock_merchant;
 pub mod unique_paths;
 pub mod word_break;
 pub mod maximal_square;
+pub mod counting_bits;
