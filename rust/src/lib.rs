@@ -35,3 +35,4 @@ pub mod unique_paths;
 pub mod word_break;
 pub mod maximal_square;
 pub mod counting_bits;
+pub mod design_hashset;
