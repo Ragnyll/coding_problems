@@ -27,6 +27,7 @@ pub mod merge_sorted_list;
 pub mod pascals_triangle;
 pub mod poisonous_plants;
 pub mod repeated_string;
+pub mod design_linked_list;
 pub mod reverse_linked_list;
 pub mod search_in_rotated_sorted_array;
 pub mod shortest_path;

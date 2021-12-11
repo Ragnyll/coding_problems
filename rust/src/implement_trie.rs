@@ -84,17 +84,17 @@ impl Trie {
     }
 
     #[allow(dead_code)]
-    fn starts_with(&mut self, prefix: String) -> bool {
+    fn starts_with(&self, prefix: String) -> bool {
         if prefix.is_empty() {
             return true;
         }
-        let mut current_link = &mut self.root;
+        let mut current_link = &self.root;
         let chars = prefix.chars();
         for c in chars {
             if !current_link.children.contains_key(&c) {
                 return false;
             }
-            current_link = current_link.children.get_mut(&c).unwrap();
+            current_link = current_link.children.get(&c).unwrap();
         }
         true
     }
