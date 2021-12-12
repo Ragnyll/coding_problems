@@ -39,3 +39,4 @@ pub mod counting_bits;
 pub mod design_hashset;
 pub mod design_hashmap;
 pub mod implement_trie;
+pub mod valid_parentheses;
