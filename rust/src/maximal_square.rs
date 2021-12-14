@@ -15,7 +15,8 @@ pub fn maximal_square(matrix: Vec<Vec<char>>) -> i32 {
                 dp[i][j] = *vec![dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]]
                     .iter()
                     .min()
-                    .unwrap() + 1;
+                    .unwrap()
+                    + 1;
 
                 // save the largest square
                 largest = std::cmp::max(dp[i][j], largest);

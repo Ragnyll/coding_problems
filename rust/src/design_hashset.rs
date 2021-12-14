@@ -24,7 +24,6 @@ impl MyHashSet {
         }
     }
 
-
     /// add a number to the hash table
     fn add(&mut self, key: i32) {
         if !self.contains(key) {
@@ -46,11 +45,11 @@ impl MyHashSet {
     }
 
     /// checks if the vector contains a value and returns the index it first occurs at if it does
-    fn contains_index(&self, hashed_val: usize, key: i32) -> Option<usize>{
+    fn contains_index(&self, hashed_val: usize, key: i32) -> Option<usize> {
         let bucket = &self.buckets[hashed_val];
         for i in 0..bucket.len() {
             if bucket[i] == key {
-                return Some(i)
+                return Some(i);
             }
         }
 
