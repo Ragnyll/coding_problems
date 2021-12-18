@@ -9,6 +9,7 @@ pub mod container_with_most_water;
 pub mod contains_duplicate;
 pub mod counting_bits;
 pub mod counting_valleys;
+pub mod course_schedule_2;
 pub mod datetimes;
 pub mod decode_ways;
 pub mod depth_first_search;
