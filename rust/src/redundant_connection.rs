@@ -3,114 +3,84 @@
 // You are given a graph that started as a tree with n nodes labeled from 1 to n, with one additional edge added. The added edge has two different vertices chosen from 1 to n, and was not an edge that already existed. The graph is represented as an array edges of length n where edges[i] = [ai, bi] indicates that there is an edge between nodes ai and bi in the graph.
 //
 // Return an edge that can be removed so that the resulting graph is a tree of n nodes. If there are multiple answers, return the answer that occurs last in the input.
-// TODO: THIS IS WRONG!
 use std::collections::HashMap;
 use std::collections::HashSet;
-use std::collections::VecDeque;
 
 /// Returns if a path exists from src to destination given an adjacency_list
 #[allow(dead_code)]
-fn df_has_path(adjacency_list: &HashMap<i32, HashSet<i32>>, src: i32, dest: i32) -> bool {
+fn df_has_path(
+    adjacency_list: &HashMap<i32, HashSet<i32>>,
+    src: i32,
+    dest: i32,
+    mut visited: HashSet<i32>,
+) -> bool {
+    visited.insert(src);
     if src == dest {
         return true;
     }
 
     for neighbor in &adjacency_list[&src] {
-        if df_has_path(&adjacency_list, *neighbor, dest) {
+        if visited.contains(neighbor)
+            && df_has_path(&adjacency_list, *neighbor, dest, visited.clone())
+        {
             return true;
         }
     }
     false
 }
 
-#[allow(dead_code)]
-fn bf_has_path(adjacency_list: &HashMap<i32, HashSet<i32>>, src: i32, dest: i32) -> bool {
-    if src == dest {
-        return true;
-    }
-
-    let mut queue = VecDeque::new();
-    queue.push_back(src);
-
-    while !queue.is_empty() {
-        let current = queue.pop_front().unwrap();
-        if current == dest {
-            return true;
+fn insert_edge_into_graph(
+    edge: Vec<i32>,
+    graph: HashMap<i32, HashSet<i32>>,
+) -> HashMap<i32, HashSet<i32>> {
+    let mut new_graph = graph.clone();
+    match new_graph.get_mut(&edge[0]) {
+        Some(ns) => {
+            let mut new_neighbors = ns.clone();
+            new_neighbors.insert(edge[1]);
+            new_graph.insert(edge[0], new_neighbors);
         }
-
-        // get the current's neighbors
-        for neighbor in &adjacency_list[&current] {
-            queue.push_back(neighbor.clone());
+        None => {
+            let mut new_neighbors = HashSet::new();
+            new_neighbors.insert(edge[1]);
+            new_graph.insert(edge[0], new_neighbors);
         }
-    }
+    };
+    match new_graph.get_mut(&edge[1]) {
+        Some(ns) => {
+            let mut new_neighbors = ns.clone();
+            new_neighbors.insert(edge[0]);
+            new_graph.insert(edge[1], new_neighbors);
+        }
+        None => {
+            let mut new_neighbors = HashSet::new();
+            new_neighbors.insert(edge[0]);
+            new_graph.insert(edge[1], new_neighbors);
+        }
+    };
 
-    false
-}
-
-fn build_adjacency_list(edges: &Vec<Vec<i32>>) -> HashMap<i32, HashSet<i32>> {
-    // adj list will be a hash map mapping a course to the prerequisite
-    let mut adj_list: HashMap<i32, HashSet<i32>> = HashMap::with_capacity(edges.len());
-
-    for pair in edges {
-        // insert both nodes connected by edge
-        match adj_list.get(&pair[0]) {
-            Some(connected_nodes) => {
-                let mut new_node_set = connected_nodes.clone();
-                new_node_set.insert(pair[1]);
-                adj_list.insert(pair[0], new_node_set);
-            }
-            None => {
-                adj_list.insert(pair[0], HashSet::from([pair[1]]));
-            }
-        };
-
-        match adj_list.get(&pair[1]) {
-            Some(connected_nodes) => {
-                let mut new_node_set = connected_nodes.clone();
-                new_node_set.insert(pair[0]);
-                adj_list.insert(pair[1], new_node_set);
-            }
-            None => {
-                adj_list.insert(pair[1], HashSet::from([pair[0]]));
-            }
-        };
-    }
-
-    adj_list
+    new_graph
 }
 
 fn find_redundant_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
-    let adj_list = build_adjacency_list(&edges);
-    let mut visited = HashSet::with_capacity(edges.len());
-    let mut edge_to_remove = vec![];
+    let mut graph: HashMap<i32, HashSet<i32>> = HashMap::with_capacity(2 * edges.len());
+
+    for edge in edges.clone() {
+        graph.insert(edge[0], HashSet::new());
+        graph.insert(edge[1], HashSet::new());
+    }
 
     for edge in edges {
-        if visited.contains(&edge[0]) && visited.contains(&edge[1]) {
-            edge_to_remove = edge.clone();
+        let visited = HashSet::new();
+        if graph.get(&edge[0]).is_some()
+            && graph.get(&edge[1]).is_some()
+            && df_has_path(&graph, edge[0], edge[1], visited)
+        {
+            return vec![edge[0], edge[1]];
         }
-        if bf_has_path(&adj_list, edge[0], edge[1]) {
-            visited.insert(edge[0]);
-            visited.insert(edge[1]);
-        }
+        // the edge is not redudnant
+        graph = insert_edge_into_graph(edge, graph);
     }
 
-    edge_to_remove
-}
-
-#[cfg(test)]
-mod test {
-    use std::collections::{HashMap, HashSet};
-    use super::build_adjacency_list;
-
-    #[test]
-    fn test_build_adjacency_list() {
-        let edges = vec![vec![1, 2], vec![2,3]];
-        let mut expected = HashMap::new();
-        expected.insert(1, HashSet::from([2]));
-        expected.insert(2, HashSet::from([1, 3]));
-        expected.insert(3, HashSet::from([2]));
-
-        assert_eq!(build_adjacency_list(&edges), expected);
-    }
-
+    vec![]
 }
