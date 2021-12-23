@@ -5,24 +5,30 @@
 // How many possible unique paths are there?
 
 #[allow(dead_code)]
-fn unique_paths(m: i32, n: i32) -> i32 {
-    // initialzie array
-    let mut paths = vec![vec![0; (n + 1) as usize]; (m + 1) as usize];
-    paths[1][1] = 1;
+pub fn unique_paths(n: i32, m: i32) -> i32 {
+    if n < 1 || m < 1 {
+        return 0
+    }
 
-    for i in 0..((m + 1) as usize) {
-        for j in 0..((n + 1) as usize) {
-            // add the val in the square to the right and below
-            if i + 1 <= m as usize {
-                paths[i + 1][j] = paths[i + 1][j] + paths[i][j];
+    // preallocate array
+    let mut paths = vec![vec![0; (m + 1) as usize]; (n + 1) as usize];
+    // set base case
+    paths[1][1] = 1;
+    for i in 0..=n as usize {
+        for j in 0..=m as usize {
+            // add to the right
+            if i + 1 <= n as usize {
+                paths[i + 1][j] = paths[i][j] + paths[i+1][j];
             }
-            if j + 1 <= n as usize {
-                paths[i][j + 1] = paths[i][j + 1] + paths[i][j];
+            // add down
+            if j + 1 <= m as usize{
+                paths[i][j + 1] = paths[i][j] + paths[i][j + 1];
             }
+
         }
     }
 
-    return paths[m as usize][n as usize];
+    paths[n as usize][m as usize]
 }
 
 #[cfg(test)]
@@ -32,5 +38,6 @@ pub mod test {
     #[test]
     fn test_unique_paths() {
         assert_eq!(unique_paths(3, 7), 28);
+        assert_eq!(unique_paths(3, 4), 10);
     }
 }
