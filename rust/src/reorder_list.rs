@@ -16,12 +16,14 @@ pub struct ListNode {
 
 impl ListNode {
     #[inline]
+    #[allow(dead_code)]
     fn new(val: i32) -> Self {
         ListNode { next: None, val }
     }
 }
 
 /// given a value n runs up to that index in the linked list and returns the node. n must be a valid node
+#[allow(dead_code)]
 fn goto_n(head: &Option<Box<ListNode>>, n: usize) -> Option<Box<ListNode>> {
     let mut cur_node: ListNode = head.as_ref().unwrap().as_ref().clone();
     for _ in 0..n {
@@ -45,12 +47,16 @@ fn find_ll_len(head: &Option<Box<ListNode>>) -> usize {
 }
 
 pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
-    let forward_ptr: usize = 1;
-
+    let mut forward_ptr: usize = 1;
     // scan to the end to get Ln. this will tell us the size so we know when to stop iterating
-    let l_n = find_ll_len(&head);
+    let mut backward_ptr = find_ll_len(&head) - 2;
 
     let mut cur_node: ListNode = head.as_ref().unwrap().as_ref().clone();
+    while forward_ptr != backward_ptr {
+
+        forward_ptr += 1;
+        backward_ptr += 1;
+    }
 }
 
 #[cfg(test)]
@@ -58,7 +64,7 @@ mod test {
     use super::{ListNode, reorder_list, goto_n, find_ll_len};
 
     // creates a small ll for testing purposes
-    fn create_ll() -> Option<Box<ListNode>>{
+    fn create_ll() -> Option<Box<ListNode>> {
         let ln2 = ListNode::new(3);
         let mut ln1 = ListNode::new(2);
         let mut ln0 = ListNode::new(1);
